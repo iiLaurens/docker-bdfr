@@ -14,13 +14,14 @@ COPY default_config.cfg /app/default_config.cfg
 COPY options.yaml.example /app/options.yaml.example
 
 WORKDIR /config
+RUN chown -R nobody /config && chmod -R 666 /config
 
 VOLUME /config
 VOLUME /downloads
 
 EXPOSE 7634
 
-RUN chown nobody /config /downloads /app
+
 
 USER nobody
 ENTRYPOINT ["/bin/bash"]
