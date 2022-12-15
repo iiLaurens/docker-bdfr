@@ -120,7 +120,6 @@ fi
 # Run BDFR
 log "Running BDFR"
 python -m bdfr download /downloads $_OPTS
-chown -R 99:100 /downloads
 chmod -R 666 /downloads
 log "BDFR run complete"
 
