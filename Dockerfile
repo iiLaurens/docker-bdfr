@@ -5,11 +5,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt update && \
 
 RUN pip3 install git+https://github.com/aliparlakci/bulk-downloader-for-reddit.git@development
 
-USER nobody
-
 RUN mkdir /app
 COPY ./app/wrapper.sh /app/wrapper.sh
-RUN chmod +x /app/wrapper.sh
+RUN chmod 777 /app/wrapper.sh
 
 RUN mkdir /config
 COPY default_config.cfg /app/default_config.cfg
@@ -22,5 +20,8 @@ VOLUME /downloads
 
 EXPOSE 7634
 
+RUN chown nobody /config /downloads /app
+
+USER nobody
 ENTRYPOINT ["/bin/bash"]
 CMD ["/app/wrapper.sh"]
