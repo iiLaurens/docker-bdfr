@@ -31,6 +31,8 @@
 #Debug
 [[ $DEBUG ]] && set -x
 
+umask 0
+
 # INIT VARS - BDFR specific. Values here will override those set in options.yaml
 #
 BDFR_POSTLIMIT="${BDFR_POSTLIMIT:-}"		# number of submissions retrieve. note: there is a hard limit of 1000. This is governed by Reddit
@@ -120,7 +122,6 @@ fi
 # Run BDFR
 log "Running BDFR"
 python -m bdfr download /downloads $_OPTS
-chmod -R 666 /downloads
 log "BDFR run complete"
 
 # Run detox
