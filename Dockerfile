@@ -6,7 +6,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt update && \
 ARG UID=99
 ARG GID=100
 
-RUN groupadd -g "${GID}" users  && useradd -u "${UID}" -g "${GID}" nobody
+RUN useradd -u "${UID}" -g "${GID}" nobody
 
 USER nobody
 
