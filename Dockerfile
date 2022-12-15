@@ -1,10 +1,11 @@
 FROM python:3.9-slim
-USER nobody
 
 RUN DEBIAN_FRONTEND=noninteractive apt update && \
      apt install -y tar git htop iftop vim tzdata rdfind symlinks detox
 
-RUN pip3 install git+https://github.com/aliparlakci/bulk-downloader-for-reddit.git@development
+USER nobody
+
+RUN pip3 install --user git+https://github.com/aliparlakci/bulk-downloader-for-reddit.git@development
 
 RUN mkdir /app
 COPY ./app/wrapper.sh /app/wrapper.sh
