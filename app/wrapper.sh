@@ -120,6 +120,8 @@ fi
 # Run BDFR
 log "Running BDFR"
 python -m bdfr download /downloads $_OPTS
+chown -R 99:100 /downloads
+chmod -R 666 /downloads
 log "BDFR run complete"
 
 # Run detox
@@ -132,12 +134,14 @@ fi
 # Run rdfind
 if [ "${BDFR_RDFIND,,}" = "true" ]; then
   log "Running rdfind"
-  if [ -z "${BDFR_RDFIND_OPTS}" ]; then	# run rdfind with default settings, convert dupes to symlinks
-    rdfind -makeresultsfile false -makesymlinks true /downloads
-  else
-    rdfind "${BDFR_RDFIND_OPTS}" /downloads
-    log "rdfind done"
-  fi
+  for d in /downloads/*/ ; do
+    if [ -z "${BDFR_RDFIND_OPTS}" ]; then	# run rdfind with default settings,   convert dupes to symlinks
+      rdfind -makeresultsfile false -makesymlinks true ${d}
+    else
+      rdfind ${BDFR_RDFIND_OPTS} ${d}
+    fi
+  done
+  log "rdfind done"
 fi
 
 # Run symlinks
