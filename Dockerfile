@@ -4,7 +4,7 @@ RUN useradd --create-home -u 99 -g 100 bdfr
 
 RUN mkdir /app
 COPY ./app/wrapper.sh /app/wrapper.sh
-RUN chmod 777 /app/wrapper.sh
+RUN chown -R bdfr /app && chmod 777 /app/wrapper.sh
 
 RUN mkdir /config
 COPY default_config.cfg /app/default_config.cfg
