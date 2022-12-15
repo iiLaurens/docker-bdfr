@@ -1,6 +1,6 @@
 FROM python:3.9-slim
      
-RUN useradd --no-create-home -u 99 -g 100 bdfr
+RUN useradd --create-home -u 99 -g 100 bdfr
 
 RUN mkdir /app
 COPY ./app/wrapper.sh /app/wrapper.sh
