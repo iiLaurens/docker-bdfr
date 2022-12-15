@@ -1,4 +1,4 @@
-FROM python:3.9-bullseye-slim
+FROM python:3.9-slim
 
 RUN DEBIAN_FRONTEND=noninteractive apt update && \
      apt install -y tar git htop iftop vim tzdata rdfind symlinks detox
