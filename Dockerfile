@@ -9,6 +9,7 @@ RUN chmod 777 /app/wrapper.sh
 RUN mkdir /config
 COPY default_config.cfg /app/default_config.cfg
 COPY options.yaml.example /app/options.yaml.example
+RUN chown -R bdfr /config && chmod -R 666 /config
 
 RUN DEBIAN_FRONTEND=noninteractive apt update && \
      apt install -y tar git htop iftop vim tzdata rdfind symlinks detox
@@ -17,7 +18,6 @@ RUN pip3 install git+https://github.com/aliparlakci/bulk-downloader-for-reddit.g
 
 USER bdfr
 WORKDIR /config
-RUN chown -R bdfr /config && chmod -R 666 /config
 
 VOLUME /config
 VOLUME /downloads
