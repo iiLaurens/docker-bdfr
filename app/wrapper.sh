@@ -135,10 +135,12 @@ fi
 if [ "${BDFR_RDFIND,,}" = "true" ]; then
   log "Running rdfind"
   for d in /downloads/*/ ; do
-    if [ -z "${BDFR_RDFIND_OPTS}" ]; then	# run rdfind with default settings,   convert dupes to symlinks
-      rdfind -makeresultsfile false -makesymlinks true ${d}
-    else
-      rdfind ${BDFR_RDFIND_OPTS} ${d}
+    if [ "$(grep -c "$d" /config/options.yaml)" -ge 0 ]; then
+      if [ -z "${BDFR_RDFIND_OPTS}" ]; then	# run rdfind with default settings,   convert dupes to symlinks
+        rdfind -makeresultsfile false -makesymlinks true ${d}
+      else
+        rdfind ${BDFR_RDFIND_OPTS} ${d}
+      fi
     fi
   done
   log "rdfind done"
